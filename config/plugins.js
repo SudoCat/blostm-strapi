@@ -1,3 +1,18 @@
+const sendgrid = (env) => ({
+    email: {
+        config: {
+          provider: 'sendgrid',
+          providerOptions: {
+            apiKey: env('SENDGRID_API_KEY'),
+          },
+          settings: {
+            defaultFrom: 'dev@protonmail.com',
+            defaultReplyTo: 'dev@protonmail.com',
+          },
+        },
+    },
+})
+
 const aws = (env) => ({
     upload: {
         config: {
@@ -20,11 +35,15 @@ const aws = (env) => ({
 })
 
 module.exports = ({ env }) => {
-    const aws_access_key_id = env("AWS_ACCESS_KEY_ID", "");
+    const plugins = {};
 
-    if (aws_access_key_id) {
-        return aws(env);
-    } else {
-        return {};
+    if (env("AWS_ACCESS_KEY_ID", "")) {
+        plugins.concat(aws(env))
     }
+
+    if (env("SENDGRID_API_KEY", "")) {
+        plugins.concat(sendgrid(env))
+    }
+
+    return plugins;
 };
