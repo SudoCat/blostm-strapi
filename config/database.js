@@ -13,7 +13,10 @@ const sqlite = (env) => ({
 const postgres = (env) => ({
   connection: {
     client: 'postgres',
-    connectionString: env("DATABASE_URL", "")
+    connection: {
+      connectionString: env("DATABASE_URL", ""),
+      ssl: true
+    }
   }
 });
 
