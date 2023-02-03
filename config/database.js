@@ -12,12 +12,14 @@ const sqlite = (env) => ({
 
 const postgres = (env) => ({
   connection: {
-    client: 'postgres',
+    client: "postgres",
     connection: {
       connectionString: env("DATABASE_URL", ""),
-      ssl: true
-    }
-  }
+      ssl: {
+        rejectUnauthorized: env.bool("DATABASE_SSL_SELF", false), // For self-signed certificates
+      },
+    },
+  },
 });
 
 module.exports = ({ env }) => {
