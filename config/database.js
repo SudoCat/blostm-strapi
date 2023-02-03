@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = ({ env }) => ({
+const sqlite = (env) => ({
   connection: {
     client: 'sqlite',
     connection: {
@@ -9,3 +9,20 @@ module.exports = ({ env }) => ({
     useNullAsDefault: true,
   },
 });
+
+const postgres = (env) => ({
+  connection: {
+    client: 'postgres',
+    connectionString: env("DATABASE_URL", "")
+  }
+});
+
+module.exports = ({ env }) => {
+  const database_url = env("DATABASE_URL", "");
+
+  if (database_url) {
+    return postgres(env);
+  } else {
+    return sqlite(env);
+  }
+};
