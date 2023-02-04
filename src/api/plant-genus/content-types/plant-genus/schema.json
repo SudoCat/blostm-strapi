@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plant_genera",
+  "info": {
+    "singularName": "plant-genus",
+    "pluralName": "plant-genera",
+    "displayName": "PlantGenus",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "plants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::plant.plant",
+      "mappedBy": "plantGenus"
+    },
+    "summary": {
+      "type": "text"
+    }
+  }
+}

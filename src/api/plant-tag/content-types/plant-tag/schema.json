@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plant_tags",
+  "info": {
+    "singularName": "plant-tag",
+    "pluralName": "plant-tags",
+    "displayName": "PlantTag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "plants": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::plant.plant",
+      "mappedBy": "plantTags"
+    }
+  }
+}

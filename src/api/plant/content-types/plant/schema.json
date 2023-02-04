@@ -4,7 +4,8 @@
   "info": {
     "singularName": "plant",
     "pluralName": "plants",
-    "displayName": "Plant"
+    "displayName": "Plant",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,17 +20,128 @@
       "type": "uid",
       "targetField": "commonName"
     },
-    "summary": {
+    "outdoorSummary": {
       "type": "text",
-      "required": true
+      "required": false
     },
-    "image": {
-      "allowedTypes": [
-        "images"
-      ],
+    "outdoorImage": {
       "type": "media",
       "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "latinName": {
+      "type": "string",
+      "required": false
+    },
+    "plantGenus": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::plant-genus.plant-genus",
+      "inversedBy": "plants"
+    },
+    "plantTags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::plant-tag.plant-tag",
+      "inversedBy": "plants"
+    },
+    "isInvasiveInUk": {
+      "type": "boolean",
+      "default": false
+    },
+    "requiresPruning": {
+      "type": "boolean"
+    },
+    "propergationInstructions": {
+      "type": "text"
+    },
+    "hardinessZone": {
+      "type": "customField",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "exposure": {
+      "type": "customField",
+      "options": [
+        "Full Sun:full-sun,",
+        "Partial Sun:partial-sun,",
+        "Shade:shade"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "indoorCare": {
+      "type": "richtext"
+    },
+    "defaultPlantType": {
+      "type": "enumeration",
+      "enum": [
+        "outdoor",
+        "indoor",
+        "bonsai"
+      ],
+      "default": "outdoor",
       "required": true
+    },
+    "outdoorCare": {
+      "type": "richtext"
+    },
+    "plantTypes": {
+      "type": "customField",
+      "options": [
+        "Outdoor:outdoor",
+        "Indoor:indoor",
+        "Bonsai:bonsai"
+      ],
+      "required": true,
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "indoorSummary": {
+      "type": "text"
+    },
+    "bonsaiSummary": {
+      "type": "text"
+    },
+    "bonsaiCare": {
+      "type": "richtext"
+    },
+    "indoorImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "bonsaiImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "aspect": {
+      "type": "customField",
+      "options": [
+        "North Facing:north",
+        "East Facing:east",
+        "South Facing:south",
+        "West Facing:west"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }
